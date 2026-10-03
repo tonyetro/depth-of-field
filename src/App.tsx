@@ -45,7 +45,7 @@ const CIRCLES_OF_CONFUSION: Record<
   Webcam: {
     coc: 0.002,
     sensorHeight: 3.6,
-    cropFactor: 9.6 
+    cropFactor: 9.6
   },
   Smartphone: {
     coc: 0.002,
@@ -86,70 +86,70 @@ const COMMON_SETUPS: {
   idealDistance: number;
   sensor: string;
 }[] = [
-  {
-    name: "Webcam",
-    focalLength: 3.6,
-    aperture: 2.8,
-    idealDistance: 36,
-    sensor: "Webcam",
-  },
-  {
-    name: "Smartphone",
-    focalLength: 4.3,
-    aperture: 2.0,
-    idealDistance: 36,
-    sensor: "Smartphone",
-  },
-  {
-    name: "APS-C - 35mm",
-    focalLength: 35,
-    aperture: 1.8,
-    idealDistance: 72,
-    sensor: "APS-C",
-  },
-  {
-    name: "FF - 28mm",
-    focalLength: 28,
-    aperture: 1.4,
-    idealDistance: 48,
-    sensor: "35mm (full frame)",
-  },
-  {
-    name: "FF - 35mm",
-    focalLength: 35,
-    aperture: 1.4,
-    idealDistance: 60,
-    sensor: "35mm (full frame)",
-  },
-  {
-    name: "FF - 50mm",
-    focalLength: 50,
-    aperture: 1.8,
-    idealDistance: 72,
-    sensor: "35mm (full frame)",
-  },
-  {
-    name: "FF - 70mm",
-    focalLength: 70,
-    aperture: 2.8,
-    idealDistance: 96,
-    sensor: "35mm (full frame)",
-  },
-  {
-    name: "6x6 - 80mm",
-    focalLength: 80,
-    aperture: 2.8,
-    idealDistance: 90,
-    sensor: "6x6 (Medium Format)",
-  },
-  {
-    name: "6x7 - 80mm",
-    focalLength: 80,
-    aperture: 2.8,
-    idealDistance: 80,
-    sensor: "6x7 (Medium Format)",
-  },
-];
+    {
+      name: "Webcam",
+      focalLength: 3.6,
+      aperture: 2.8,
+      idealDistance: 36,
+      sensor: "Webcam",
+    },
+    {
+      name: "Smartphone",
+      focalLength: 4.3,
+      aperture: 2.0,
+      idealDistance: 36,
+      sensor: "Smartphone",
+    },
+    {
+      name: "APS-C - 35mm",
+      focalLength: 35,
+      aperture: 1.8,
+      idealDistance: 72,
+      sensor: "APS-C",
+    },
+    {
+      name: "FF - 28mm",
+      focalLength: 28,
+      aperture: 1.4,
+      idealDistance: 48,
+      sensor: "35mm (full frame)",
+    },
+    {
+      name: "FF - 35mm",
+      focalLength: 35,
+      aperture: 1.4,
+      idealDistance: 60,
+      sensor: "35mm (full frame)",
+    },
+    {
+      name: "FF - 50mm",
+      focalLength: 50,
+      aperture: 1.8,
+      idealDistance: 72,
+      sensor: "35mm (full frame)",
+    },
+    {
+      name: "FF - 70mm",
+      focalLength: 70,
+      aperture: 2.8,
+      idealDistance: 96,
+      sensor: "35mm (full frame)",
+    },
+    {
+      name: "6x6 - 80mm",
+      focalLength: 80,
+      aperture: 2.8,
+      idealDistance: 90,
+      sensor: "6x6 (Medium Format)",
+    },
+    {
+      name: "6x7 - 80mm",
+      focalLength: 80,
+      aperture: 2.8,
+      idealDistance: 80,
+      sensor: "6x7 (Medium Format)",
+    },
+  ];
 
 const SYSTEMS = ["Metric", "Imperial"] as const;
 
@@ -166,7 +166,7 @@ function App() {
   const [system, setSystem] = useState<(typeof SYSTEMS)[number]>("Imperial");
   const [sensor, setSensor] = useState("35mm (full frame)");
   const [customSensorWidth, setCustomSensorWidth] = useState(36);
-const [customSensorHeight, setCustomSensorHeight] = useState(24);
+  const [customSensorHeight, setCustomSensorHeight] = useState(24);
 
   const { colorMode, toggleColorMode } = useColorMode();
 
@@ -175,18 +175,18 @@ const [customSensorHeight, setCustomSensorHeight] = useState(24);
   const distanceToSubjectInMM = distanceToSubjectInInches * 25.4;
 
   const isCustomSensor = sensor === "Custom";
-const customCocCalculated = Math.sqrt(customSensorWidth ** 2 + customSensorHeight ** 2) / 1500;
-const circleOfConfusionInMillimeters = isCustomSensor
-  ? customCocCalculated
-  : CIRCLES_OF_CONFUSION[sensor].coc;
-const cropFactor = isCustomSensor
-  ? 43.27 / Math.sqrt(customSensorWidth ** 2 + customSensorHeight ** 2)
-  : CIRCLES_OF_CONFUSION[sensor].cropFactor;
+  const customCocCalculated = Math.sqrt(customSensorWidth ** 2 + customSensorHeight ** 2) / 1500;
+  const circleOfConfusionInMillimeters = isCustomSensor
+    ? customCocCalculated
+    : CIRCLES_OF_CONFUSION[sensor].coc;
+  const cropFactor = isCustomSensor
+    ? 43.27 / Math.sqrt(customSensorWidth ** 2 + customSensorHeight ** 2)
+    : CIRCLES_OF_CONFUSION[sensor].cropFactor;
 
   const hyperFocalDistanceInMM =
     focalLengthInMillimeters +
     (focalLengthInMillimeters * focalLengthInMillimeters) /
-      (aperture * circleOfConfusionInMillimeters);
+    (aperture * circleOfConfusionInMillimeters);
   const depthOfFieldFarLimitInMM =
     (hyperFocalDistanceInMM * distanceToSubjectInMM) /
     (hyperFocalDistanceInMM -
@@ -212,8 +212,8 @@ const cropFactor = isCustomSensor
   }
 
   const sensorHeight = isCustomSensor
-  ? customSensorHeight
-  : CIRCLES_OF_CONFUSION[sensor].sensorHeight;
+    ? customSensorHeight
+    : CIRCLES_OF_CONFUSION[sensor].sensorHeight;
   const verticalFieldOfView =
     (2 * Math.atan(sensorHeight / 2 / focalLengthInMillimeters) * 180) /
     Math.PI;
@@ -242,12 +242,12 @@ const cropFactor = isCustomSensor
     totalDofFeet < 0.5
       ? { label: "Macro / Product", color: "purple" }
       : totalDofFeet < 3
-      ? { label: "Portrait Range", color: "blue" }
-      : totalDofFeet < 10
-      ? { label: "Group / Event", color: "teal" }
-      : totalDofFeet < 30
-      ? { label: "Street / Architecture", color: "green" }
-      : { label: "Landscape", color: "gray" };
+        ? { label: "Portrait Range", color: "blue" }
+        : totalDofFeet < 10
+          ? { label: "Group / Event", color: "teal" }
+          : totalDofFeet < 30
+            ? { label: "Street / Architecture", color: "green" }
+            : { label: "Landscape", color: "gray" };
 
   // ── Theme-aware colors 
   const cardBg = useColorModeValue("white", "gray.700");
@@ -565,27 +565,27 @@ const cropFactor = isCustomSensor
         {/* Sensor + Subject */}
         <Box pt={6}>
           {isCustomSensor && (
-  <Box mt={2}>
-    <Flex gap={2} align="center" mb={1}>
-      <Text fontSize="xs" w="80px" color={mutedText}>Width (mm)</Text>
-      <input
-        type="number"
-        value={customSensorWidth}
-        onChange={(e) => setCustomSensorWidth(Number(e.target.value))}
-        style={{ width: 70, padding: "2px 6px", borderRadius: 6, border: "1px solid #ccc" }}
-      />
-    </Flex>
-    <Flex gap={2} align="center" mb={1}>
-      <Text fontSize="xs" w="80px" color={mutedText}>Height (mm)</Text>
-      <input
-        type="number"
-        value={customSensorHeight}
-        onChange={(e) => setCustomSensorHeight(Number(e.target.value))}
-        style={{ width: 70, padding: "2px 6px", borderRadius: 6, border: "1px solid #ccc" }}
-      />
-    </Flex>
-  </Box>
-)}<Flex gap={3} direction={{ base: "column", md: "row" }}>
+            <Box mt={2}>
+              <Flex gap={2} align="center" mb={1}>
+                <Text fontSize="xs" w="80px" color={mutedText}>Width (mm)</Text>
+                <input
+                  type="number"
+                  value={customSensorWidth}
+                  onChange={(e) => setCustomSensorWidth(Number(e.target.value))}
+                  style={{ width: 70, padding: "2px 6px", borderRadius: 6, border: "1px solid #ccc" }}
+                />
+              </Flex>
+              <Flex gap={2} align="center" mb={1}>
+                <Text fontSize="xs" w="80px" color={mutedText}>Height (mm)</Text>
+                <input
+                  type="number"
+                  value={customSensorHeight}
+                  onChange={(e) => setCustomSensorHeight(Number(e.target.value))}
+                  style={{ width: 70, padding: "2px 6px", borderRadius: 6, border: "1px solid #ccc" }}
+                />
+              </Flex>
+            </Box>
+          )}<Flex gap={3} direction={{ base: "column", md: "row" }}>
             <Flex gap={2} width={{ base: "100%", md: "50%" }}>
               <Flex
                 w={{ base: "72px", md: "20%" }}
