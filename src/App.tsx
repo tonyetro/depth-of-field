@@ -159,12 +159,12 @@ function clamp(value: number, min: number, max: number) {
 
 function App() {
   const [distanceToSubjectInInches, setDistanceToSubjectInInches] =
-    useState(72);
-  const [focalLengthInMillimeters, setFocalLengthInMillimeters] = useState(50);
-  const [aperture, setAperture] = useState(1.8);
+    useState(109);
+  const [focalLengthInMillimeters, setFocalLengthInMillimeters] = useState(27);
+  const [aperture, setAperture] = useState(2.8);
   const [subject, setSubject] = useState("Human");
-  const [system, setSystem] = useState<(typeof SYSTEMS)[number]>("Imperial");
-  const [sensor, setSensor] = useState("35mm (full frame)");
+  const [system, setSystem] = useState<(typeof SYSTEMS)[number]>("Metric");
+  const [sensor, setSensor] = useState("APS-C");
   const [customSensorWidth, setCustomSensorWidth] = useState(36);
   const [customSensorHeight, setCustomSensorHeight] = useState(24);
 
